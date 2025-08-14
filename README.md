@@ -9,7 +9,7 @@ A modern, fully-functional digital menu and ordering system built with Astro and
 ### 🍽️ Complete Menu System
 
 - **100+ Menu Items** across 12 categories
-- **12 Food Categories**: Burgers, Pizza, Chicken, Seafood, Pasta, Salads, Sandwiches, Breakfast, Desserts, Beverages, Sides, and Healthy Options
+- **12 Food Categories**: Burgers, Pizza,Pasta, Salads, Sandwiches, Breakfast, Desserts, Beverages, Sides, and Healthy Options
 - **Rich Product Details** with descriptions, pricing, and appetizing images
 - **Category Filtering** with smooth navigation
 - **Popular Items** highlighting and badges
@@ -50,13 +50,13 @@ A modern, fully-functional digital menu and ordering system built with Astro and
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Astro](https://astro.build/) - Modern static site generator
-- **Frontend**: [React](https://reactjs.org/) - Component library
-- **Styling**: [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS
-- **State Management**: [Zustand](https://github.com/pmndrs/zustand) - Lightweight state management
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) - Reusable component library
-- **Icons**: [Lucide React](https://lucide.dev/) - Beautiful icons
-- **Fonts**: [Google Fonts](https://fonts.google.com/) - Montserrat & Open Sans
+- **Framework**: [Astro](https://astro.build/)                          # Modern static site generator
+- **Frontend**: [React](https://reactjs.org/)                           # Component library
+- **Styling**: [TailwindCSS](https://tailwindcss.com/)                  # Utility-first CSS
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)    # Lightweight state management
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)                # Reusable component library
+- **Icons**: [Lucide React](https://lucide.dev/)                        # Beautiful icons
+- **Fonts**: [Google Fonts](https://fonts.google.com/)                  # Montserrat & Open Sans
 - **TypeScript**: Full type safety throughout the application
 
 ## 🚀 Quick Start
@@ -69,171 +69,96 @@ A modern, fully-functional digital menu and ordering system built with Astro and
 ### Installation
 
 1. **Clone the repository**
-   \`\`\`bash
+
+   ```bash
    git clone <repository-url>
    cd digital-menu-system
-   \`\`\`
+   ```
 
 2. **Install dependencies**
-   \`\`\`bash
-   npm install
 
-   # or
-
-   yarn install
-   \`\`\`
+    ```bash
+    npm install
+    or
+    yarn install
+    ```
 
 3. **Start development server**
-   \`\`\`bash
-   npm run dev
 
-   # or
-
-   yarn dev
-   \`\`\`
+    ```bash
+    npm run dev
+    or
+    yarn dev
+    ```
 
 4. **Open your browser**
-   Navigate to `http://localhost:4321`
+
+    ```bash
+    Navigate to `http://localhost:4321`
+    ```
 
 ### Build for Production
 
-\`\`\`bash
+```bash
 npm run build
 npm run preview
-\`\`\`
+```
 
-## 📁 Project Structure
+## 📁 Project Structure of QickBite
 
-\`\`\`
-digital-menu-system/
-├── src/
-│ ├── components/ # React components
-│ │ ├── ui/ # Reusable UI components
-│ │ ├── MenuPage.tsx # Main menu interface
-│ │ ├── CartInitializer.tsx
-│ │ └── ...
-│ ├── layouts/
-│ │ └── Layout.astro # Main layout template
-│ ├── lib/
-│ │ ├── menu-data.ts # Menu items database
-│ │ ├── cart-store.ts # Zustand cart store
-│ │ └── utils.ts # Utility functions
-│ ├── pages/
-│ │ ├── index.astro # Homepage
-│ │ └── api/ # API endpoints
-│ │ ├── menu.json.ts
-│ │ ├── menu/[category].json.ts
-│ │ └── orders.json.ts
-│ └── styles/
-│ └── globals.css # Global styles
-├── public/ # Static assets
-│ └── \*.png # Menu item images
-├── astro.config.mjs # Astro configuration
-├── tailwind.config.mjs # Tailwind configuration
-└── package.json
-\`\`\`
+```bash
+├── 📁 .git/
+├── 📁 .next/
+├── 📁 app/
+│   ├── 📁 api/
+│   │   ├── 📁 menu/
+│   │   │   ├── 📁 [category]
+│   │   └── 📁 orders/
+├── 📁 components/
+│   ├── 📁 ui/
+├── 📁 hooks/
+├── 📁 lib/
+├── 📁 node_modules/
+├── 📁 public/
+├── 📁 styles/
+│   └── 🎨 globals.css
+├── 🚫 .gitignore
+├── 📖 README.md
+├── 📄 components.json
+├── 📄 next-env.d.ts
+├── 📄 next.config.mjs
+├── 📄 package-lock.json
+├── 📄 package.json
+├── ⚙️ pnpm-lock.yaml
+├── 📄 postcss.config.mjs
+└── 📄 tsconfig.json
+```
 
 ## 🔌 API Endpoints
 
 ### Menu Endpoints
 
-- `GET /api/menu.json` - Fetch all menu items
-- `GET /api/menu/[category].json` - Fetch items by category
+- `GET /api/menu.json`              # Fetch all menu items
+- `GET /api/menu/[category].json`   # Fetch items by category
 
 ### Order Endpoints
 
-- `POST /api/orders.json` - Submit new order
-
-### Example API Response
-
-\`\`\`json
-{
-"success": true,
-"data": [
-{
-"id": "burger-001",
-"name": "Classic Beef Burger",
-"category": "Burgers",
-"price": 12.99,
-"description": "Juicy beef patty with fresh lettuce...",
-"image": "/classic-beef-burger.png",
-"popular": true,
-"customizable": true,
-"sizes": [
-{ "name": "Regular", "price": 0 },
-{ "name": "Large", "price": 2.00 }
-],
-"addons": [
-{ "name": "Extra Cheese", "price": 1.50 },
-{ "name": "Bacon", "price": 2.00 }
-]
-}
-]
-}
-\`\`\`
+- `POST/api/orders.json`            # Submit new order
 
 ## 🎯 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run astro` - Run Astro CLI commands
-
-## 🍔 Menu Categories
-
-1. **Burgers** (15 items) - Classic to gourmet burgers
-2. **Pizza** (12 items) - Traditional and specialty pizzas
-3. **Chicken** (10 items) - Fried, grilled, and specialty chicken
-4. **Seafood** (8 items) - Fresh fish and seafood dishes
-5. **Pasta** (8 items) - Italian classics and modern twists
-6. **Salads** (8 items) - Fresh and healthy options
-7. **Sandwiches** (10 items) - Deli-style and gourmet sandwiches
-8. **Breakfast** (8 items) - Morning favorites
-9. **Desserts** (8 items) - Sweet treats and indulgences
-10. **Beverages** (10 items) - Hot and cold drinks
-11. **Sides** (8 items) - Perfect accompaniments
-12. **Healthy** (6 items) - Nutritious and diet-friendly options
-
-## 🎨 Design System
-
-### Colors
-
-- **Primary**: Cyan-600 (#0891b2)
-- **Accent**: Indigo-500 (#6366f1)
-- **Neutrals**: White, Gray-100 to Gray-900
-
-### Typography
-
-- **Headings**: Montserrat (Black, Bold, SemiBold)
-- **Body**: Open Sans (Regular, Medium)
-
-### Components
-
-- Consistent spacing using Tailwind's spacing scale
-- Rounded corners (rounded-lg, rounded-xl)
-- Subtle shadows and hover effects
-- Mobile-first responsive breakpoints
+- `npm run dev`                     # Start development server
+- `npm run build`                   # Build for production
+- `npm run preview`                 # Preview production build
+- `npm run astro`                   # Run Astro CLI commands
 
 ## 🔧 Customization
 
 ### Adding New Menu Items
 
+```bash
 Edit `src/lib/menu-data.ts` and add items to the appropriate category:
-
-\`\`\`typescript
-{
-id: "unique-id",
-name: "Item Name",
-category: "Category",
-price: 9.99,
-description: "Delicious description",
-image: "/item-image.png",
-popular: false,
-customizable: true,
-sizes: [...],
-addons: [...]
-}
-\`\`\`
+```
 
 ### Modifying Styles
 
@@ -253,7 +178,7 @@ addons: [...]
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Design inspiration from McDonald's and KFC digital kiosks
 - UI components from shadcn/ui
@@ -261,5 +186,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Images from Unsplash and custom generation
 
 ---
-
-**Built with ❤️ using Astro, React, and TailwindCSS**
