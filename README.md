@@ -50,13 +50,13 @@ A modern, fully-functional digital menu and ordering system built with Astro and
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Astro](https://astro.build/)                          # Modern static site generator
-- **Frontend**: [React](https://reactjs.org/)                           # Component library
-- **Styling**: [TailwindCSS](https://tailwindcss.com/)                  # Utility-first CSS
-- **State Management**: [Zustand](https://github.com/pmndrs/zustand)    # Lightweight state management
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)                # Reusable component library
-- **Icons**: [Lucide React](https://lucide.dev/)                        # Beautiful icons
-- **Fonts**: [Google Fonts](https://fonts.google.com/)                  # Montserrat & Open Sans
+- **Framework**: [Astro](https://astro.build/)
+- **Frontend**: [React](https://reactjs.org/)
+- **Styling**: [TailwindCSS](https://tailwindcss.com/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Fonts**: [Google Fonts](https://fonts.google.com/)
 - **TypeScript**: Full type safety throughout the application
 
 ## 🚀 Quick Start
@@ -77,25 +77,25 @@ A modern, fully-functional digital menu and ordering system built with Astro and
 
 2. **Install dependencies**
 
-    ```bash
-    npm install
-    or
-    yarn install
-    ```
+   ```bash
+   npm install
+   or
+   yarn install
+   ```
 
 3. **Start development server**
 
-    ```bash
-    npm run dev
-    or
-    yarn dev
-    ```
+   ```bash
+   npm run dev
+   or
+   yarn dev
+   ```
 
 4. **Open your browser**
 
-    ```bash
-    Navigate to `http://localhost:4321`
-    ```
+   ```bash
+   Navigate to `http://localhost:4321`
+   ```
 
 ### Build for Production
 
@@ -138,19 +138,19 @@ npm run preview
 
 ### Menu Endpoints
 
-- `GET /api/menu.json`              # Fetch all menu items
-- `GET /api/menu/[category].json`   # Fetch items by category
+- `GET /api/menu.json`
+- `GET /api/menu/[category].json`
 
 ### Order Endpoints
 
-- `POST/api/orders.json`            # Submit new order
+- `POST/api/orders.json` # Submit new order
 
 ## 🎯 Available Scripts
 
-- `npm run dev`                     # Start development server
-- `npm run build`                   # Build for production
-- `npm run preview`                 # Preview production build
-- `npm run astro`                   # Run Astro CLI commands
+- `npm run dev`
+- `npm run build`
+- `npm run preview`
+- `npm run astro`
 
 ## 🔧 Customization
 
