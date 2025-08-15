@@ -152,46 +152,53 @@ export default function MenuPage() {
           )}
 
           {/* Menu Items Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredItems.map((item) => (
-              <Card
-                key={item.id}
-                className="overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-105 bg-white"
-              >
-                <div className="relative">
-                  <img src={item.image || "/placeholder.svg"} alt={item.name} className="w-full h-48 object-cover" />
-                  {item.popular && (
-                    <Badge className="absolute top-3 left-3 bg-indigo-500 hover:bg-indigo-600">
-                      <Star className="h-3 w-3 mr-1" />
-                      Popular
-                    </Badge>
-                  )}
-                </div>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {filteredItems.map((item) => (
+    <Card
+      key={item.id}
+      className="overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-105 bg-white"
+    >
+      <div className="relative">
+        <img
+          src={item.image || "/placeholder.svg"}
+          alt={item.name}
+          className="w-full h-[300px] object-cover"
+        />
+        {item.popular && (
+          <Badge className="absolute top-3 left-3 bg-indigo-500 hover:bg-indigo-600">
+            <Star className="h-3 w-3 mr-1" />
+            Popular
+          </Badge>
+        )}
+      </div>
 
-                <CardContent className="p-6">
-                  <div className="mb-4">
-                    <h4 className="font-serif font-bold text-lg text-gray-900 mb-2">{item.name}</h4>
-                    <p className="font-sans text-gray-600 text-sm leading-relaxed">{item.description}</p>
-                  </div>
+      <CardContent className="p-6">
+        <div className="mb-4">
+          <h4 className="font-serif font-bold text-lg text-gray-900 mb-2">{item.name}</h4>
+          <p className="font-sans text-gray-600 text-sm leading-relaxed">{item.description}</p>
+        </div>
 
-                  <div className="flex items-center justify-between">
-                    <span className="font-serif font-bold text-xl text-cyan-600">${item.price.toFixed(2)}</span>
-                    <Button
-                      onClick={() => handleAddToCart(item)}
-                      className="bg-cyan-600 hover:bg-cyan-700 text-white font-sans font-medium px-4 py-2"
-                    >
-                      <Plus className="h-4 w-4 mr-1" />
-                      Add
-                    </Button>
-                  </div>
+        <div className="flex items-center justify-between">
+          <span className="font-serif font-bold text-xl text-cyan-600">
+            ${item.price.toFixed(2)}
+          </span>
+          <Button
+            onClick={() => handleAddToCart(item)}
+            className="bg-cyan-600 hover:bg-cyan-700 text-white font-sans font-medium px-4 py-2"
+          >
+            <Plus className="h-4 w-4 mr-1" />
+            Add
+          </Button>
+        </div>
 
-                  {item.customizations && (
-                    <p className="font-sans text-xs text-gray-500 mt-2">Customization available</p>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        {item.customizations && (
+          <p className="font-sans text-xs text-gray-500 mt-2">Customization available</p>
+        )}
+      </CardContent>
+    </Card>
+  ))}
+</div>
+
 
           {filteredItems.length === 0 && (
             <div className="text-center py-12">
