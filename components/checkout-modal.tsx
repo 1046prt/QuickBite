@@ -1,25 +1,20 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Separator } from "@/components/ui/separator"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { CreditCard, MapPin, Clock, CheckCircle, Loader2 } from "lucide-react"
-import { useCartStore } from "@/lib/cart-store"
+import { useState } from "react";
+import { CreditCard, MapPin, Clock, CheckCircle, Loader2 } from "lucide-react";
+import { useCartStore } from "@/lib/cart-store";
+import "../styles/checkout-modal.css";
 
 interface CheckoutModalProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
-  const [step, setStep] = useState<"details" | "payment" | "confirmation">("details")
-  const [loading, setLoading] = useState(false)
+  const [step, setStep] = useState<"details" | "payment" | "confirmation">(
+    "details"
+  );
+  const [loading, setLoading] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     name: "",
     email: "",
@@ -29,36 +24,41 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     expiryDate: "",
     cvv: "",
     cardName: "",
-  })
-  const [orderId, setOrderId] = useState("")
-  const [estimatedTime, setEstimatedTime] = useState("")
+  });
+  const [orderId, setOrderId] = useState("");
+  const [estimatedTime, setEstimatedTime] = useState("");
 
-  const { items, getTotalPrice, getTotalItems, clearCart } = useCartStore()
-  const totalPrice = getTotalPrice()
-  const totalItems = getTotalItems()
-  const tax = totalPrice * 0.08 // 8% tax
-  const deliveryFee = orderDetails.orderType === "delivery" ? 3.99 : 0
-  const finalTotal = totalPrice + tax + deliveryFee
+  const { items, getTotalPrice, getTotalItems, clearCart } = useCartStore();
+  const totalPrice = getTotalPrice();
+  const totalItems = getTotalItems();
+  const tax = totalPrice * 0.08; // 8% tax
+  const deliveryFee = orderDetails.orderType === "delivery" ? 3.99 : 0;
+  const finalTotal = totalPrice + tax + deliveryFee;
 
   const handleInputChange = (field: string, value: string) => {
-    setOrderDetails((prev) => ({ ...prev, [field]: value }))
-  }
+    setOrderDetails((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleDetailsSubmit = () => {
     if (!orderDetails.name || !orderDetails.email || !orderDetails.phone) {
-      alert("Please fill in all required fields")
-      return
+      alert("Please fill in all required fields");
+      return;
     }
-    setStep("payment")
-  }
+    setStep("payment");
+  };
 
   const handlePaymentSubmit = async () => {
-    if (!orderDetails.cardNumber || !orderDetails.expiryDate || !orderDetails.cvv || !orderDetails.cardName) {
-      alert("Please fill in all payment details")
-      return
+    if (
+      !orderDetails.cardNumber ||
+      !orderDetails.expiryDate ||
+      !orderDetails.cvv ||
+      !orderDetails.cardName
+    ) {
+      alert("Please fill in all payment details");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     try {
       const response = await fetch("/api/orders", {
@@ -79,28 +79,28 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             total: finalTotal,
           },
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
-        setOrderId(data.orderId)
-        setEstimatedTime(data.estimatedTime)
-        setStep("confirmation")
-        clearCart()
+        setOrderId(data.orderId);
+        setEstimatedTime(data.estimatedTime);
+        setStep("confirmation");
+        clearCart();
       } else {
-        alert("Failed to place order. Please try again.")
+        alert("Failed to place order. Please try again.");
       }
     } catch (error) {
-      console.error("Order failed:", error)
-      alert("Failed to place order. Please try again.")
+      console.error("Order failed:", error);
+      alert("Failed to place order. Please try again.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleClose = () => {
-    setStep("details")
+    setStep("details");
     setOrderDetails({
       name: "",
       email: "",
@@ -110,49 +110,56 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       expiryDate: "",
       cvv: "",
       cardName: "",
-    })
-    onClose()
-  }
+    });
+    onClose();
+  };
 
   const formatCustomizations = (item: any) => {
-    const customizations = []
+    const customizations = [];
     if (item.selectedSize) {
-      customizations.push(`Size: ${item.selectedSize}`)
+      customizations.push(`Size: ${item.selectedSize}`);
     }
     if (item.selectedAddons && item.selectedAddons.length > 0) {
-      customizations.push(`Add-ons: ${item.selectedAddons.join(", ")}`)
+      customizations.push(`Add-ons: ${item.selectedAddons.join(", ")}`);
     }
-    return customizations.join(" • ")
-  }
+    return customizations.join(" • ");
+  };
+
+  if (!isOpen) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="font-serif font-bold text-xl text-gray-900">
+    <div className="dialog-overlay" onClick={handleClose}>
+      <div
+        className="dialog-content checkout-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="dialog-header">
+          <h2 className="dialog-title">
             {step === "details" && "Order Details"}
             {step === "payment" && "Payment Information"}
             {step === "confirmation" && "Order Confirmed!"}
-          </DialogTitle>
-        </DialogHeader>
+          </h2>
+        </div>
 
         {step === "details" && (
-          <div className="space-y-6">
+          <div className="checkout-step-content">
             {/* Order Summary */}
-            <div className="space-y-4">
-              <h3 className="font-serif font-semibold text-lg text-gray-900">Order Summary</h3>
-              <div className="bg-gray-50 rounded-lg p-4 max-h-60 overflow-y-auto">
+            <div className="order-summary">
+              <h3>Order Summary</h3>
+              <div className="order-items">
                 {items.map((item) => (
-                  <div key={item.id} className="flex justify-between items-start py-2">
-                    <div className="flex-1">
-                      <p className="font-sans font-medium text-gray-900">
+                  <div key={item.id} className="order-item">
+                    <div className="order-item-details">
+                      <p className="order-item-name">
                         {item.quantity}x {item.menuItem.name}
                       </p>
                       {formatCustomizations(item) && (
-                        <p className="font-sans text-xs text-gray-500">{formatCustomizations(item)}</p>
+                        <p className="order-item-customizations">
+                          {formatCustomizations(item)}
+                        </p>
                       )}
                     </div>
-                    <p className="font-sans font-semibold text-cyan-600">
+                    <p className="order-item-price">
                       ${(item.totalPrice * item.quantity).toFixed(2)}
                     </p>
                   </div>
@@ -161,241 +168,279 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             </div>
 
             {/* Customer Details */}
-            <div className="space-y-4">
-              <h3 className="font-serif font-semibold text-lg text-gray-900">Your Details</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="name" className="font-sans font-medium">
+            <div className="customer-details">
+              <h3>Your Details</h3>
+              <div className="form-grid">
+                <div className="form-field">
+                  <label htmlFor="name" className="form-label">
                     Full Name *
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     id="name"
+                    className="input"
                     value={orderDetails.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
                     placeholder="Enter your full name"
-                    className="font-sans"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="phone" className="font-sans font-medium">
+                <div className="form-field">
+                  <label htmlFor="phone" className="form-label">
                     Phone Number *
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     id="phone"
+                    className="input"
                     value={orderDetails.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
                     placeholder="(555) 123-4567"
-                    className="font-sans"
                   />
                 </div>
               </div>
-              <div>
-                <Label htmlFor="email" className="font-sans font-medium">
+              <div className="form-field full-width">
+                <label htmlFor="email" className="form-label">
                   Email Address *
-                </Label>
-                <Input
+                </label>
+                <input
                   id="email"
                   type="email"
+                  className="input"
                   value={orderDetails.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   placeholder="your.email@example.com"
-                  className="font-sans"
                 />
               </div>
             </div>
 
             {/* Order Type */}
-            <div className="space-y-4">
-              <h3 className="font-serif font-semibold text-lg text-gray-900">Order Type</h3>
-              <RadioGroup
-                value={orderDetails.orderType}
-                onValueChange={(value) => handleInputChange("orderType", value)}
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="pickup" id="pickup" />
-                  <Label htmlFor="pickup" className="flex items-center gap-2 cursor-pointer font-sans">
-                    <MapPin className="h-4 w-4" />
-                    Pickup (Ready in 10-15 minutes)
-                  </Label>
+            <div className="order-type">
+              <h3>Order Type</h3>
+              <div className="radio-group">
+                <div
+                  className={`order-type-option ${
+                    orderDetails.orderType === "pickup" ? "selected" : ""
+                  }`}
+                  onClick={() => handleInputChange("orderType", "pickup")}
+                >
+                  <input
+                    type="radio"
+                    name="orderType"
+                    value="pickup"
+                    checked={orderDetails.orderType === "pickup"}
+                    onChange={() => handleInputChange("orderType", "pickup")}
+                  />
+                  <div className="order-type-details">
+                    <div className="order-type-label">
+                      <MapPin size={16} />
+                      Pickup (Ready in 10-15 minutes)
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="delivery" id="delivery" />
-                  <Label htmlFor="delivery" className="flex items-center gap-2 cursor-pointer font-sans">
-                    <Clock className="h-4 w-4" />
-                    Delivery (+$3.99, 25-35 minutes)
-                  </Label>
+                <div
+                  className={`order-type-option ${
+                    orderDetails.orderType === "delivery" ? "selected" : ""
+                  }`}
+                  onClick={() => handleInputChange("orderType", "delivery")}
+                >
+                  <input
+                    type="radio"
+                    name="orderType"
+                    value="delivery"
+                    checked={orderDetails.orderType === "delivery"}
+                    onChange={() => handleInputChange("orderType", "delivery")}
+                  />
+                  <div className="order-type-details">
+                    <div className="order-type-label">
+                      <Clock size={16} />
+                      Delivery (+$3.99, 25-35 minutes)
+                    </div>
+                  </div>
                 </div>
-              </RadioGroup>
+              </div>
             </div>
 
-            <Button
+            <button
               onClick={handleDetailsSubmit}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 font-sans font-semibold"
+              className="btn btn-default btn-continue"
             >
               Continue to Payment
-            </Button>
+            </button>
           </div>
         )}
 
         {step === "payment" && (
-          <div className="space-y-6">
+          <div className="checkout-step-content">
             {/* Order Total */}
-            <Card>
-              <CardContent className="p-4">
-                <div className="space-y-2">
-                  <div className="flex justify-between font-sans">
-                    <span>Subtotal ({totalItems} items)</span>
-                    <span>${totalPrice.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between font-sans">
-                    <span>Tax</span>
-                    <span>${tax.toFixed(2)}</span>
-                  </div>
-                  {deliveryFee > 0 && (
-                    <div className="flex justify-between font-sans">
-                      <span>Delivery Fee</span>
-                      <span>${deliveryFee.toFixed(2)}</span>
-                    </div>
-                  )}
-                  <Separator />
-                  <div className="flex justify-between font-serif font-bold text-lg">
-                    <span>Total</span>
-                    <span className="text-cyan-600">${finalTotal.toFixed(2)}</span>
-                  </div>
+            <div className="payment-total">
+              <div className="payment-total-row">
+                <span>Subtotal ({totalItems} items)</span>
+                <span>${totalPrice.toFixed(2)}</span>
+              </div>
+              <div className="payment-total-row">
+                <span>Tax</span>
+                <span>${tax.toFixed(2)}</span>
+              </div>
+              {deliveryFee > 0 && (
+                <div className="payment-total-row">
+                  <span>Delivery Fee</span>
+                  <span>${deliveryFee.toFixed(2)}</span>
                 </div>
-              </CardContent>
-            </Card>
+              )}
+              <div className="separator"></div>
+              <div className="payment-total-row">
+                <span>Total</span>
+                <span className="payment-total-final">
+                  ${finalTotal.toFixed(2)}
+                </span>
+              </div>
+            </div>
 
             {/* Payment Details */}
-            <div className="space-y-4">
-              <h3 className="font-serif font-semibold text-lg text-gray-900 flex items-center gap-2">
-                <CreditCard className="h-5 w-5" />
+            <div className="payment-info">
+              <h3>
+                <CreditCard size={20} />
                 Payment Information
               </h3>
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="cardName" className="font-sans font-medium">
+              <div className="payment-form">
+                <div className="form-field">
+                  <label htmlFor="cardName" className="form-label">
                     Cardholder Name *
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     id="cardName"
+                    className="input"
                     value={orderDetails.cardName}
-                    onChange={(e) => handleInputChange("cardName", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("cardName", e.target.value)
+                    }
                     placeholder="John Doe"
-                    className="font-sans"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="cardNumber" className="font-sans font-medium">
+                <div className="form-field">
+                  <label htmlFor="cardNumber" className="form-label">
                     Card Number *
-                  </Label>
-                  <Input
+                  </label>
+                  <input
                     id="cardNumber"
+                    className="input"
                     value={orderDetails.cardNumber}
-                    onChange={(e) => handleInputChange("cardNumber", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("cardNumber", e.target.value)
+                    }
                     placeholder="1234 5678 9012 3456"
-                    className="font-sans"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="expiryDate" className="font-sans font-medium">
+                <div className="payment-row">
+                  <div className="form-field">
+                    <label htmlFor="expiryDate" className="form-label">
                       Expiry Date *
-                    </Label>
-                    <Input
+                    </label>
+                    <input
                       id="expiryDate"
+                      className="input"
                       value={orderDetails.expiryDate}
-                      onChange={(e) => handleInputChange("expiryDate", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("expiryDate", e.target.value)
+                      }
                       placeholder="MM/YY"
-                      className="font-sans"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="cvv" className="font-sans font-medium">
+                  <div className="form-field">
+                    <label htmlFor="cvv" className="form-label">
                       CVV *
-                    </Label>
-                    <Input
+                    </label>
+                    <input
                       id="cvv"
+                      className="input"
                       value={orderDetails.cvv}
                       onChange={(e) => handleInputChange("cvv", e.target.value)}
                       placeholder="123"
-                      className="font-sans"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={() => setStep("details")} className="flex-1 font-sans">
+            <div className="checkout-actions">
+              <button
+                className="btn btn-outline btn-back"
+                onClick={() => setStep("details")}
+              >
                 Back to Details
-              </Button>
-              <Button
+              </button>
+              <button
                 onClick={handlePaymentSubmit}
                 disabled={loading}
-                className="flex-1 bg-cyan-600 hover:bg-cyan-700 font-sans font-semibold"
+                className="btn btn-default btn-continue"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    <Loader2 className="spinner" size={16} />
                     Processing...
                   </>
                 ) : (
                   `Place Order - $${finalTotal.toFixed(2)}`
                 )}
-              </Button>
+              </button>
             </div>
           </div>
         )}
 
         {step === "confirmation" && (
-          <div className="text-center space-y-6">
-            <div className="flex justify-center">
-              <CheckCircle className="h-16 w-16 text-green-500" />
+          <div className="confirmation-content">
+            <div className="confirmation-icon">
+              <CheckCircle size={64} />
             </div>
             <div>
-              <h3 className="font-serif font-bold text-2xl text-gray-900 mb-2">Order Placed Successfully!</h3>
-              <p className="font-sans text-gray-600">Thank you for your order. We're preparing your delicious meal!</p>
-            </div>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="font-sans font-medium">Order ID:</span>
-                    <Badge variant="outline" className="font-mono">
-                      {orderId}
-                    </Badge>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-sans font-medium">Estimated Time:</span>
-                    <span className="font-sans text-cyan-600 font-semibold">{estimatedTime}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-sans font-medium">Order Type:</span>
-                    <span className="font-sans capitalize">{orderDetails.orderType}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-sans font-medium">Total Paid:</span>
-                    <span className="font-serif font-bold text-lg text-cyan-600">${finalTotal.toFixed(2)}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="bg-cyan-50 rounded-lg p-4">
-              <p className="font-sans text-sm text-cyan-800">
-                We've sent a confirmation email to <strong>{orderDetails.email}</strong>. You'll receive updates about
-                your order status.
+              <h3 className="confirmation-title">Order Placed Successfully!</h3>
+              <p className="confirmation-subtitle">
+                Thank you for your order. We're preparing your delicious meal!
               </p>
             </div>
 
-            <Button onClick={handleClose} className="w-full bg-cyan-600 hover:bg-cyan-700 font-sans font-semibold">
+            <div className="confirmation-details">
+              <div className="confirmation-row">
+                <span className="confirmation-label">Order ID:</span>
+                <span className="badge badge-outline confirmation-value">
+                  {orderId}
+                </span>
+              </div>
+              <div className="confirmation-row">
+                <span className="confirmation-label">Estimated Time:</span>
+                <span className="confirmation-value primary">
+                  {estimatedTime}
+                </span>
+              </div>
+              <div className="confirmation-row">
+                <span className="confirmation-label">Order Type:</span>
+                <span className="confirmation-value">
+                  {orderDetails.orderType}
+                </span>
+              </div>
+              <div className="confirmation-row">
+                <span className="confirmation-label">Total Paid:</span>
+                <span className="confirmation-value total">
+                  ${finalTotal.toFixed(2)}
+                </span>
+              </div>
+            </div>
+
+            <div className="confirmation-note">
+              <p>
+                We've sent a confirmation email to{" "}
+                <strong>{orderDetails.email}</strong>. You'll receive updates
+                about your order status.
+              </p>
+            </div>
+
+            <button
+              onClick={handleClose}
+              className="btn btn-default btn-continue-shopping"
+            >
               Continue Shopping
-            </Button>
+            </button>
           </div>
         )}
-      </DialogContent>
-    </Dialog>
-  )
+      </div>
+    </div>
+  );
 }

@@ -1,10 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Home, ArrowLeft, Search } from "lucide-react";
 import Link from "next/link";
-import "/styles/NotFound.css";
+import "../styles/NotFound.css";
 
 export default function NotFound() {
   return (
@@ -19,8 +17,8 @@ export default function NotFound() {
         </div>
 
         {/* Error Message */}
-        <Card className="error-card">
-          <CardContent className="error-content">
+        <div className="card error-card">
+          <div className="error-content">
             <h1 className="error-code">404</h1>
             <h2 className="error-title">Oops! This Page is Off the Menu</h2>
             <p className="error-description">
@@ -40,24 +38,22 @@ export default function NotFound() {
             {/* Action Buttons */}
             <div className="error-actions">
               <Link href="/">
-                <Button size="lg" className="btn-back-menu">
+                <button className="btn btn-lg btn-back-menu">
                   <Home className="btn-icon" />
                   Back to Menu
-                </Button>
+                </button>
               </Link>
 
-              <Button
-                variant="outline"
-                size="lg"
+              <button
                 onClick={() => window.history.back()}
-                className="btn-go-back"
+                className="btn btn-outline btn-lg btn-go-back"
               >
                 <ArrowLeft className="btn-icon" />
                 Go Back
-              </Button>
+              </button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Popular Items Suggestion */}
         <div className="popular-suggestion">
@@ -70,9 +66,9 @@ export default function NotFound() {
             enough of them!
           </p>
           <Link href="/#menu">
-            <Button variant="secondary" size="sm" className="btn-view-popular">
+            <button className="btn btn-secondary btn-sm btn-view-popular">
               View Popular Items
-            </Button>
+            </button>
           </Link>
         </div>
 
