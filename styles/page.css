@@ -52,6 +52,17 @@
   gap: 0.5rem;
 }
 
+.logo-circle {
+  width: 40px;             
+  height: 40px;           
+  border-radius: 50%;      
+  border: 1px solid #d1d5db; 
+  padding: 4px;          
+  background-color: #ffffff; 
+  object-fit: contain;    
+  display: block;
+}
+
 .brand-icon {
   font-size: 1.5rem;
 }
