@@ -78,7 +78,14 @@ export default function MenuPage() {
       <header className="menu-header">
         <div className="header-container">
           <div className="header-brand">
-            <div className="brand-icon">🍔</div>
+            <div className="brand-icon">
+              <img 
+              src="/logo/QuickBite.svg" 
+              alt="QuickBite" 
+              className="h-10 w-10 rounded-full border border-gray-300 p-1 bg-white" 
+              />
+            </div>
+
             <h1>QuickBite</h1>
           </div>
           <ShoppingCartSidebar>
