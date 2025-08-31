@@ -1,0 +1,96 @@
+/* Button Component Styles - components/ui/button.tsx */
+
+/* Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.btn:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Button variants */
+.btn-default {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-default:hover {
+  background-color: #0e7490;
+}
+
+.btn-outline {
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.btn-outline:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.btn-ghost:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.btn-secondary:hover {
+  background-color: #e2e8f0;
+}
+
+.btn-destructive {
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
+}
+
+.btn-destructive:hover {
+  background-color: #b91c1c;
+}
+
+/* Button sizes */
+.btn-sm {
+  height: 2.25rem;
+  border-radius: var(--radius-sm);
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+}
+
+.btn-md {
+  height: 2.5rem;
+  padding: 0 1rem;
+}
+
+.btn-lg {
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+  padding: 0 2rem;
+  font-size: 1rem;
+}

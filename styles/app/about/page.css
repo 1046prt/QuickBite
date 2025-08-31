@@ -1,0 +1,222 @@
+/* About Page Styles - app/about/page.tsx */
+
+.values-section {
+  padding: var(--space-20) 0;
+  background-color: var(--gray-50);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.section-header h2 {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-4);
+  color: var(--foreground);
+}
+
+.section-header p {
+  font-size: var(--text-xl);
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.value-card {
+  background-color: var(--white);
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border: 1px solid var(--border);
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.value-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--brand-secondary) 100%
+  );
+  border-radius: var(--radius-full);
+  margin: 0 auto var(--space-6);
+  color: var(--white);
+}
+
+.value-card h3 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-4);
+  color: var(--foreground);
+}
+
+.value-card p {
+  color: var(--muted-foreground);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.team-section {
+  padding: var(--space-20) 0;
+  background-color: var(--white);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-8);
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.team-member {
+  text-align: center;
+  background-color: var(--gray-50);
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-normal);
+}
+
+.team-member:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.member-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--space-6);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 4px solid var(--primary);
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member h4 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+  color: var(--foreground);
+}
+
+.member-role {
+  color: var(--primary);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-3);
+}
+
+.member-bio {
+  color: var(--muted-foreground);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* About Section */
+.about-section {
+  padding: var(--space-20) 0;
+  background-color: var(--white);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.about-text h2 {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-6);
+  color: var(--foreground);
+}
+
+.about-text p {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-6);
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background-color: var(--gray-50);
+  border-radius: var(--radius-lg);
+}
+
+.feature-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary);
+}
+
+.about-image {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.about-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .values-grid,
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .value-card,
+  .team-member {
+    padding: var(--space-6);
+  }
+}
