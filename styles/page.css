@@ -23,14 +23,19 @@
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Header */
 .menu-header {
   background-color: white;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 50;
@@ -53,13 +58,13 @@
 }
 
 .logo-circle {
-  width: 40px;             
-  height: 40px;           
-  border-radius: 50%;      
-  border: 1px solid #d1d5db; 
-  padding: 4px;          
-  background-color: #ffffff; 
-  object-fit: contain;    
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  padding: 4px;
+  background-color: #ffffff;
+  object-fit: contain;
   display: block;
 }
 
@@ -203,7 +208,7 @@
 
 .menu-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 .card-image-wrapper {
@@ -216,11 +221,39 @@
   object-fit: cover;
 }
 
-.popular-badge {
+.card-badges {
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.popular-badge {
   background: #6366f1;
+}
+
+.diet-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.veg-badge {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.non-veg-badge {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
 }
 
 .badge-icon {
@@ -311,4 +344,68 @@
 
 .footer-container p {
   color: #9ca3af;
+}
+/* Search Results Info */
+.search-results-info {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.results-count {
+  font-weight: 500;
+  color: #374151;
+}
+
+.active-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-tag {
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.filter-tag button {
+  background: none;
+  border: none;
+  color: #1d4ed8;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.filter-tag button:hover {
+  color: #1e40af;
+}
+
+/* Improved responsive design for search */
+@media (max-width: 640px) {
+  .search-results-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .active-filters {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
