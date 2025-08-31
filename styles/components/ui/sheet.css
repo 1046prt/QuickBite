@@ -1,0 +1,44 @@
+/* Sheet Component Styles - components/ui/sheet.tsx */
+
+/* Sheet/Sidebar */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.sheet-content {
+  position: fixed;
+  z-index: 50;
+  background-color: var(--background);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.3s ease-in-out;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.sheet-content-right {
+  right: 0;
+  top: 0;
+  width: 100%;
+  max-width: 32rem;
+  border-left: 1px solid var(--border);
+}
+
+.sheet-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.sheet-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}

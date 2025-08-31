@@ -1,0 +1,9 @@
+/* Separator Component Styles - components/ui/separator.tsx */
+
+/* Separator */
+.separator {
+  height: 1px;
+  width: 100%;
+  background-color: var(--border);
+  margin: 1rem 0;
+}
