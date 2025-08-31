@@ -83,7 +83,7 @@ export default function MenuPage() {
           <div className="header-brand">
             <div className="brand-icon">
               <img
-                src="/logo/QuickBite.svg"
+                src="/logo/QuickBite.png"
                 alt="QuickBite"
                 className="logo-circle"
               />
