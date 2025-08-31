@@ -1,27 +1,16 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Montserrat, Open_Sans } from "next/font/google";
 import "../styles/globals.css";
 import "../styles/components.css";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-montserrat",
-  weight: ["400", "600", "700", "900"],
-});
-
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-open-sans",
-  weight: ["400", "500", "600"],
-});
+import "../styles/layout.css";
+import "../styles/pages.css";
+import "../styles/auth.css";
+import "../styles/additional-pages.css";
 
 export const metadata: Metadata = {
   title: "QuickBite - Digital Menu & Ordering",
   description: "Order delicious food in seconds with our digital menu system",
-  generator: "v0.app",
+  generator: "Prakash Raj",
 };
 
 export default function RootLayout({
@@ -30,11 +19,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${montserrat.variable} ${openSans.variable} antialiased`}
-    >
-      <body>{children}</body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
