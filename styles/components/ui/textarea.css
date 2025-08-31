@@ -1,0 +1,30 @@
+/* Textarea Component Styles - components/ui/textarea.tsx */
+
+/* Textarea */
+.textarea {
+  display: flex;
+  min-height: 4rem;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--input);
+  background-color: var(--background);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.2);
+}
+
+.textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.textarea::placeholder {
+  color: var(--muted-foreground);
+}
