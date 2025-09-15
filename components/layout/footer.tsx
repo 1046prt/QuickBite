@@ -48,19 +48,19 @@ export function Footer() {
             <h4>Quick Links</h4>
             <ul className="footer-links">
               <li>
-                <a href="#menu">Menu</a>
+                <a href="/">Menu</a>
               </li>
               <li>
-                <a href="#about">About Us</a>
+                <a href="/about">About Us</a>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <a href="/contact">Contact</a>
               </li>
               <li>
-                <a href="#faq">FAQ</a>
+                <a href="/faq">FAQ</a>
               </li>
               <li>
-                <a href="#changelog">Changelog</a>
+                <a href="/changelog">Changelog</a>
               </li>
             </ul>
           </div>

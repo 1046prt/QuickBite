@@ -143,7 +143,6 @@ export function Header({ onSearch, onFilterChange }: HeaderProps) {
             )}
           </div>
 
-
           {/* Cart & Mobile Menu */}
           <div className="header-actions">
             <ShoppingCartSidebar>
@@ -236,25 +235,32 @@ export function Header({ onSearch, onFilterChange }: HeaderProps) {
 
             <nav className="mobile-nav">
               <a
-                href="#menu"
+                href="/"
                 className="nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Menu
               </a>
               <a
-                href="#about"
+                href="/about"
                 className="nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </a>
               <a
-                href="#contact"
+                href="/contact"
                 className="nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
+              </a>
+              <a
+                href="/faq"
+                className="nav-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                FAQ
               </a>
             </nav>
           </div>
