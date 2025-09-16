@@ -130,56 +130,17 @@ export default function AboutPage() {
               <div className="member-image">
                 <img
                   src="/team/ceo.jpg"
-                  alt="John Doe - CEO"
+                  alt="Prakash Raj | Developer"
                   onError={(e) => {
                     e.currentTarget.src =
                       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%236b7280'%3ECEO%3C/text%3E%3C/svg%3E";
                   }}
                 />
               </div>
-              <h4>John Doe</h4>
-              <p className="member-role">CEO & Founder</p>
+              <h4>Prakash Raj</h4>
+              <p className="member-role">Developer</p>
               <p className="member-bio">
-                Passionate about food and technology, John founded QuickBite to
-                revolutionize food delivery.
-              </p>
-            </div>
-
-            <div className="team-member">
-              <div className="member-image">
-                <img
-                  src="/team/cto.jpg"
-                  alt="Jane Smith - CTO"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%236b7280'%3ECTO%3C/text%3E%3C/svg%3E";
-                  }}
-                />
-              </div>
-              <h4>Jane Smith</h4>
-              <p className="member-role">CTO</p>
-              <p className="member-bio">
-                Tech enthusiast with 10+ years of experience building scalable
-                platforms.
-              </p>
-            </div>
-
-            <div className="team-member">
-              <div className="member-image">
-                <img
-                  src="/team/chef.jpg"
-                  alt="Mike Johnson - Head Chef"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='14' fill='%236b7280'%3EChef%3C/text%3E%3C/svg%3E";
-                  }}
-                />
-              </div>
-              <h4>Mike Johnson</h4>
-              <p className="member-role">Head Chef</p>
-              <p className="member-bio">
-                Culinary expert ensuring every dish meets our high standards of
-                taste and quality.
+                Passionate about building scalable web applications.
               </p>
             </div>
           </div>
