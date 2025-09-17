@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { X, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import { useUserStore } from "@/lib/user-store";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -9,11 +10,19 @@ interface AuthModalProps {
   initialMode?: "login" | "signup";
 }
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+}
+
 export function AuthModal({
   isOpen,
   onClose,
   initialMode = "login",
 }: AuthModalProps) {
+  const { login, signup } = useUserStore();
   const [mode, setMode] = useState<"login" | "signup">(initialMode);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -22,14 +31,83 @@ export function AuthModal({
     password: "",
     confirmPassword: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle authentication logic here
-    console.log("Auth submission:", { mode, formData });
-    onClose();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    // Validation
+    if (mode === "signup") {
+      if (formData.password !== formData.confirmPassword) {
+        setError("Passwords do not match");
+        setLoading(false);
+        return;
+      }
+      
+      if (formData.password.length < 6) {
+        setError("Password must be at least 6 characters");
+        setLoading(false);
+        return;
+      }
+    }
+
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: mode,
+          email: formData.email,
+          password: formData.password,
+          name: formData.name,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Authentication failed");
+      }
+
+      if (data.success) {
+        setSuccess(data.message);
+        
+        // Update user store
+        if (mode === "login" && data.user) {
+          login(data.user);
+        } else if (mode === "signup" && data.user) {
+          signup(data.user);
+        }
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+        // Close modal after a short delay
+        setTimeout(() => {
+          onClose();
+        }, 1500);
+      } else {
+        setError(data.message);
+      }
+    } catch (err: any) {
+      console.error("Auth error:", err);
+      setError(err.message || "An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +115,8 @@ export function AuthModal({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    // Clear error when user starts typing
+    if (error) setError("");
   };
 
   return (
@@ -62,6 +142,18 @@ export function AuthModal({
               : "Create an account to start your food journey"}
           </p>
         </div>
+
+        {error && (
+          <div className="auth-error">
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="auth-success">
+            {success}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="auth-form">
           {mode === "signup" && (
@@ -115,6 +207,7 @@ export function AuthModal({
                 className="form-input"
                 placeholder="Enter your password"
                 required
+                minLength={6}
               />
               <button
                 type="button"
@@ -145,8 +238,14 @@ export function AuthModal({
             </div>
           )}
 
-          <button type="submit" className="btn btn-primary auth-submit">
-            {mode === "login" ? "Sign In" : "Create Account"}
+          <button 
+            type="submit" 
+            className="btn btn-primary auth-submit"
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="loading-spinner"></span>
+            ) : mode === "login" ? "Sign In" : "Create Account"}
           </button>
         </form>
 
@@ -177,7 +276,11 @@ export function AuthModal({
             <button
               type="button"
               className="auth-switch-btn"
-              onClick={() => setMode(mode === "login" ? "signup" : "login")}
+              onClick={() => {
+                setMode(mode === "login" ? "signup" : "login");
+                setError("");
+                setSuccess("");
+              }}
             >
               {mode === "login" ? "Sign Up" : "Sign In"}
             </button>
