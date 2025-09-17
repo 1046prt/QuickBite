@@ -1,0 +1,41 @@
+/* Auth Page Styles - app/auth/page.tsx */
+
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-4);
+  background-color: var(--background);
+}
+
+.auth-page-container {
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Remove the overlay effect when on dedicated auth page */
+.auth-page .auth-modal-overlay {
+  position: relative;
+  background-color: transparent;
+  backdrop-filter: none;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.auth-page .auth-modal-content {
+  max-width: 100%;
+  box-shadow: none;
+  animation: none;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 0;
+  }
+  
+  .auth-page-container {
+    margin: 0;
+  }
+}

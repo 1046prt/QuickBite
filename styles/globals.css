@@ -40,6 +40,8 @@
   --accent-foreground: var(--gray-900);
   --destructive: var(--brand-error);
   --destructive-foreground: var(--white);
+  --success: var(--brand-success);
+  --success-foreground: var(--white);
   --border: var(--gray-200);
   --input: var(--gray-200);
   --ring: var(--brand-primary);
@@ -154,6 +156,8 @@
   --accent-foreground: var(--gray-900);
   --destructive: var(--brand-error);
   --destructive-foreground: var(--white);
+  --success: var(--brand-success);
+  --success-foreground: var(--white);
   --border: var(--gray-700);
   --input: var(--gray-700);
   --ring: var(--brand-primary);
@@ -347,7 +351,7 @@ a:hover {
   color: var(--muted-foreground);
 }
 .text-success {
-  color: var(--brand-success);
+  color: var(--success);
 }
 .text-warning {
   color: var(--brand-warning);
@@ -366,7 +370,7 @@ a:hover {
   background-color: var(--muted);
 }
 .bg-success {
-  background-color: var(--brand-success);
+  background-color: var(--success);
 }
 .bg-warning {
   background-color: var(--brand-warning);

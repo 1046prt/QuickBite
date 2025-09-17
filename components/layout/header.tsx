@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ShoppingCart, Search, Menu, X, Filter } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, Filter, User } from "lucide-react";
 import { useCartStore } from "@/lib/cart-store";
+import { useUserStore } from "@/lib/user-store";
 import { ShoppingCartSidebar } from "@/components/shopping-cart-sidebar";
 import { useDebounce } from "@/hooks/use-debounce";
 
@@ -24,6 +25,7 @@ export function Header({ onSearch, onFilterChange }: HeaderProps) {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDietType, setSelectedDietType] = useState("all");
   const { getTotalItems } = useCartStore();
+  const { user, isAuthenticated, logout } = useUserStore();
   const cartItemCount = getTotalItems();
 
   // Debounce search query
@@ -61,6 +63,11 @@ export function Header({ onSearch, onFilterChange }: HeaderProps) {
     setSearchQuery("");
     setSelectedCategory("all");
     setSelectedDietType("all");
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
   };
 
   return (
@@ -143,8 +150,26 @@ export function Header({ onSearch, onFilterChange }: HeaderProps) {
             )}
           </div>
 
-          {/* Cart & Mobile Menu */}
+          {/* Cart & User Actions */}
           <div className="header-actions">
+            {/* User Authentication */}
+            {isAuthenticated ? (
+              <div className="user-menu">
+                <span className="user-greeting">Hi, {user?.name}</span>
+                <button
+                  onClick={handleLogout}
+                  className="btn btn-outline user-btn"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <a href="/auth" className="btn btn-primary user-btn">
+                <User className="user-icon" />
+                <span className="desktop-only">Login</span>
+              </a>
+            )}
+
             <ShoppingCartSidebar>
               <button className="btn btn-outline cart-btn">
                 <ShoppingCart className="cart-icon" />
@@ -262,6 +287,22 @@ export function Header({ onSearch, onFilterChange }: HeaderProps) {
               >
                 FAQ
               </a>
+              {isAuthenticated ? (
+                <button
+                  onClick={handleLogout}
+                  className="nav-link"
+                >
+                  Logout
+                </button>
+              ) : (
+                <a
+                  href="/auth"
+                  className="nav-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </a>
+              )}
             </nav>
           </div>
         )}

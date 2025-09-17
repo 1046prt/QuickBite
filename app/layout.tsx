@@ -6,6 +6,7 @@ import "../styles/layout.css";
 import "../styles/pages.css";
 import "../styles/auth.css";
 import "../styles/additional-pages.css";
+import "../styles/app/auth/page.css";
 
 export const metadata: Metadata = {
   title: "QuickBite - Digital Menu & Ordering",
