@@ -79,7 +79,7 @@ export default function ContactPage() {
                   <div className="method-details">
                     <h4>Call Us</h4>
                     <p>
-                      +1 (555) 123-4567
+                      +91-9508015377
                       <br />
                       Mon-Sun: 9:00 AM - 11:00 PM
                     </p>
@@ -93,9 +93,9 @@ export default function ContactPage() {
                   <div className="method-details">
                     <h4>Email Us</h4>
                     <p>
-                      hello@quickbite.com
+                      1046prt@gmail.com
                       <br />
-                      support@quickbite.com
+                      prakashraj.info
                     </p>
                   </div>
                 </div>
